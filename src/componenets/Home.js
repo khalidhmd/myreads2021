@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
 
-function Home({ books }) {
+function Home({ books, updateBook }) {
   const shelves = { currentlyReading: [], read: [], wantToRead: [] };
   books.forEach((book) => {
     shelves[book.shelf].push(book);
   });
-  console.log(books);
 
   return (
     <div className="list-books">
@@ -16,7 +15,14 @@ function Home({ books }) {
       </div>
       <div className="list-books-content">
         {Object.keys(shelves).map((shelf) => {
-          return <Shelf key={shelf} shelf={shelf} books={shelves[shelf]} />;
+          return (
+            <Shelf
+              key={shelf}
+              shelf={shelf}
+              books={shelves[shelf]}
+              updateBook={updateBook}
+            />
+          );
         })}
       </div>
       <div className="open-search">
