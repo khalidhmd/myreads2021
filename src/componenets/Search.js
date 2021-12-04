@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Search() {
+  const [term, setTerm] = useState("");
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -9,7 +10,11 @@ function Search() {
           Close
         </Link>
         <div className="search-books-input-wrapper">
-          <input type="text" placeholder="Search by title, author, or ISBN" />
+          <input
+            type="text"
+            value={term}
+            placeholder="Search by title, author, or ISBN"
+          />
         </div>
       </div>
       <div className="search-books-results">
