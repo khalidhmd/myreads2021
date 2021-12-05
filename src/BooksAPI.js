@@ -29,17 +29,19 @@ export const update = (book, shelf) =>
     body: JSON.stringify({ shelf }),
   }).then((res) => res.json());
 
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
-    method: "POST",
-    headers: {
-      ...headers,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query, maxResults }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      return data.books;
-    })
-    .catch((err) => err);
+export const search = async (query, maxResults) => {
+  try {
+    const res = await fetch(`${api}/search`, {
+      method: "POST",
+      headers: {
+        ...headers,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, maxResults }),
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return { err: err.maessage };
+  }
+};

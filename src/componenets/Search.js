@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import { search } from "../BooksAPI";
 import Book from "./Book";
 
-function Search({ updateBook }) {
+function Search({ updateBook, books }) {
   const [term, setTerm] = useState("");
-  const [books, setBooks] = useState([]);
+  const [searchBooks, setSearchBooks] = useState([]);
 
   const handleChange = async (txt) => {
     setTerm(txt);
     try {
       const res = await search(txt, 20);
-      console.log(res);
-      setBooks(res);
+
+      if (!res.err) setSearchBooks(res.books);
+      if (res.err) console.log("res.err", res.err);
     } catch (err) {
       console.log(err.message);
     }
@@ -34,9 +35,15 @@ function Search({ updateBook }) {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {books.map((book) => (
-            <Book key={book.id} book={book} updateBook={updateBook} />
-          ))}
+          {searchBooks &&
+            searchBooks.map((book) => (
+              <Book
+                key={book.id}
+                book={book}
+                updateBook={updateBook}
+                books={books}
+              />
+            ))}
         </ol>
       </div>
     </div>
