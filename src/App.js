@@ -29,7 +29,7 @@ function App() {
           path="/"
           element={<Home books={books} updateBook={updateBook} />}
         />
-        <Route path="/search" element={<Search />} updateBook={updateBook} />
+        <Route path="/search" element={<Search updateBook={updateBook} />} />
       </Routes>
     </div>
   );
