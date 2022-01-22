@@ -11,10 +11,11 @@ function Search({ updateBook, books }) {
     setTerm(txt);
     try {
       const res = await search(txt, 20);
-      if (!res.error) {
+
+      if (!res.books.error) {
         setSearchBooks(res.books);
       }
-      if (res.error) {
+      if (res.books.error) {
         setSearchBooks([]);
       }
     } catch (err) {
