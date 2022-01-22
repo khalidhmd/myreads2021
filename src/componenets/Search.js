@@ -10,6 +10,10 @@ function Search({ updateBook, books }) {
   const handleChange = async (txt) => {
     setTerm(txt);
     try {
+      if (txt === "") {
+        setSearchBooks([]);
+        return;
+      }
       const res = await search(txt, 20);
 
       if (!res.books.error) {
@@ -41,12 +45,7 @@ function Search({ updateBook, books }) {
         <ol className="books-grid">
           {searchBooks &&
             searchBooks.map((book) => (
-              <Book
-                key={book.id}
-                book={book}
-                updateBook={updateBook}
-                books={books}
-              />
+              <Book key={book.id} book={book} updateBook={updateBook} />
             ))}
         </ol>
       </div>
