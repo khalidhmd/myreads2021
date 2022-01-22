@@ -44,9 +44,11 @@ function Search({ updateBook, books }) {
       <div className="search-books-results">
         <ol className="books-grid">
           {searchBooks &&
-            searchBooks.map((book) => (
-              <Book key={book.id} book={book} updateBook={updateBook} />
-            ))}
+            searchBooks.map((book) => {
+              const userBook = books.find((b) => b.id === book.id);
+              if (userBook) book.shelf = userBook.shelf;
+              return <Book key={book.id} book={book} updateBook={updateBook} />;
+            })}
         </ol>
       </div>
     </div>
