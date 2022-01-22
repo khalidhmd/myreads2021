@@ -1,7 +1,6 @@
 import React from "react";
 
 function Book({ book, updateBook }) {
-  console.log(book);
   return (
     <li>
       <div className="book">
