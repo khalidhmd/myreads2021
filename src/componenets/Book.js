@@ -1,7 +1,6 @@
 import React from "react";
 
-function Book({ book, updateBook, books }) {
-  const b = books ? books.find((e) => e.id === book.id) : {};
+function Book({ book, updateBook }) {
   return (
     <li>
       <div className="book">
@@ -18,7 +17,7 @@ function Book({ book, updateBook, books }) {
           ></div>
           <div className="book-shelf-changer">
             <select
-              defaultValue={b ? b.shelf : "none"}
+              defaultValue={book.shelf}
               onChange={(e) => updateBook(book, e.target.value)}
             >
               <option disabled>Move to...</option>
